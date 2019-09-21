@@ -1,65 +1,112 @@
 <!DOCTYPE html>
 <html>
-<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <head>
 <title>Satellite Network design</title>
-<meta charset="utf-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/aos.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta name="description" content="Satellite Network design - ISL setup schemes">
 <meta name="keywords" content="Debopam,Bhattacherjee,Ankit,Singla,Network,Latency,Satellite,Topology,ISL,Starlink,SpaceX,Amazon,Kuiper,LEO">
 <meta name="author" content="Debopam Bhattacherjee">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+
+<style>
+.rcorners_dark {
+  border-radius: 25px;
+  background: #D2EEFF;
+  padding: 10px; 
+}
+.rcorners_light {
+  border-radius: 25px;
+  background: #f4f8ff;
+  padding: 10px; 
+}
+</style>
+
 </head>
 
-<body style="background-color: #f4f8ff; padding-top: 20px; padding-right: 80px; padding-bottom: 50px; padding-left: 80px;">
-<b><div style="background-color:#D2EEFF;"><font size="5">Network topology design at 27,000 km/hour</font></div><br/>
-<font size="3">Authors: </font></b>
+<body style="padding-top: 20px; padding-right: 80px; padding-bottom: 50px; padding-left: 80px; font-family:calibri; font-size:14pt">
+<b><div class="rcorners_dark"><font size="5">Network topology design at 27,000 km/hour</font></div></b>
+<div style="padding: 10px;">
+<b>Authors:</b>
 <a href="https://bdebopam.github.io" target="_blank">Debopam Bhattacherjee</a> and  
 <a href="https://people.inf.ethz.ch/asingla/" target="_blank">Ankit Singla</a>
  @ <a href="https://ndal.ethz.ch/" target="_blank">NDAL</a> | 
 <a href="https://www.systems.ethz.ch/" target="_blank">Systems Group</a> | 
-<a href="https://ethz.ch/en.html" target="_blank">ETH Z&uuml;rich</a><br/><br/>
+<a href="https://ethz.ch/en.html" target="_blank">ETH Z&uuml;rich</a>
+</div>
 <table width="100%">
 <tr><td width="80%" style="padding-right: 5%; vertical-align: top; text-align: left;">
+<div class="rcorners_light">
 <b>Abstract: </b>Upstart space companies are actively developing massive constellations of low-flying satellites to provide global Internet service. We examine the problem of designing the inter-satellite network for low latency and high capacity. We posit that the high density of these new constellations and the high-velocity nature of such systems render traditional approaches for network design ineffective, motivating new methods specialized for this problem setting.
 <br/><br/>
 We propose one such method, explicitly aimed at tackling the high temporal dynamism inherent to low-Earth orbit satellites. We exploit repetitive patterns in the network topology such that we avoid expensive link changes over time, while still providing near-minimal latencies at nearly 2x the throughput of standard past methods. Further, we observe that the geometry of satellite constellations admits more efficient designs, if a small, controlled amount of dynamism in links is permissible. For the leading Starlink constellation, our approach enables an efficiency improvement of 54%.
+</div>
 </td>
 <td width="20%">
-<img width="70%" src="viz/plus_grid.png"/><figcaption>Traditional +Grid connectivity <a href="https://satnet-authors.github.io/cesium_orbit_grid_demo.html" target="_blank">[3D]</a></figcaption>
+<img width="90%" src="viz/plus_grid.png"/><figcaption>Traditional +Grid connectivity <a href="https://satnet-authors.github.io/cesium_orbit_grid_demo.html" target="_blank">[3D]</a></figcaption>
 </td>
 </tr>
 </table>
 <hr>
-
-<b>Results and Animations</b> showing motif-based ISL setup schemes for mega constellations as follows:
-<ul>
- <li><b>A uniform 40x40 (40<sup>2</sup>) 53&deg; inclined constellation: </b>This is a uniform 2&pi; constellation consisting of 40 orbits each with 40 satellites. The inclination is 53&deg; and operating height is &sim;550 km. The (theoretical) maximum ISL length at this operating height is 5,014 km.</li>
- <li><b>SpaceX Starlink Phase 1: </b>Starlink's first phase will have 1,584 satellites, in 24 orbits (53&deg;, 550 km), each with 66 satellites. We evaluate our motif-based approach using both (a) the maximum ISL range, with only the visibility constraint, which is 5,014 km; and (b) the minimum range necessitated by +Grid, 2,006 km. The latter represents worst-case power-limited ISLs.</li>
- <li><b>Amazon Kuiper Phase 1: </b>: Kuiper’s first phase will be a 34<sup>2</sup> constellation (51.9&deg;, 630 km). In this case, the maximum and minimum ISL ranges are 5,440 km and 1,761 km respectively.</li>
-</ul>
-<br/>
-<b>Traffic matrix: </b>1,000 most populous cities (2025 population estimates) as ground sites, with city-city traffic volume scaled &isin; [0, 1] in proportion to the population products of the city pairs. (We also examine a different workload based on economic activity in the paper.)
-<br/><br/>
-<b>Hardware dependencies: </b>The experiments will run on any general purpose computer. However, more cores would make the motif routines run faster.
-<br/><br/>
-<b>Software dependencies: </b>Experiments in this paper were run on <i>Ubuntu 16.04</i> with <i>Python 3.6.8</i>. The Python packages used are <i>ephem</i> and <i>networkx</i>.  The scripts use <i>gnuplot 5.0</i> or higher (for the pdfcairo/pngcairo terminal). But if you don't have it, you can still get the result files and plot them using other software.
-<hr>
-<table width="100%" id="single_motif"><tr><td><font size="4"><b>Motifs: Simple yet effective</b></font></tr></table>
+<div style="padding: 10px;">
+<b>Results and Animations</b> showing motif-based ISL setup schemes for mega constellations as follows
+</div>
 <table width="100%">
-<tr>
+<tr style="height: 1px">
+<td width="33%" style="vertical-align: top; text-align: left; height: inherit">
+<div class="rcorners_dark" style="height: 100%">
+<b>A uniform 40x40 (40<sup>2</sup>) 53&deg; inclined constellation: </b>This is a uniform 2&pi; constellation consisting of 40 orbits each with 40 satellites. The inclination is 53&deg; and operating height is &sim;550 km. The (theoretical) maximum ISL length at this operating height is 5,014 km.
+</div>
+</td>
+<td width="33%" style="vertical-align: top; text-align: left; height: inherit">
+<div class="rcorners_light" style="height: 100%">
+<b>SpaceX Starlink Phase 1: </b>Starlink's first phase will have 1,584 satellites, in 24 orbits (53&deg;, 550 km), each with 66 satellites. We evaluate our motif-based approach using both (a) the maximum ISL range, with only the visibility constraint, which is 5,014 km; and (b) the minimum range necessitated by +Grid, 2,006 km. The latter represents worst-case power-limited ISLs.
+</div>
+</td>
+<td style="vertical-align: top; text-align: left; height: inherit">
+<div class="rcorners_dark" style="height: 100%">
+<b>Amazon Kuiper Phase 1: </b>: Kuiper’s first phase will be a 34<sup>2</sup> constellation (51.9&deg;, 630 km). In this case, the maximum and minimum ISL ranges are 5,440 km and 1,761 km respectively.
+</div>
+</td>
+</tr>
+</table>
+<div style="padding: 10px;">
+<b>Other details</b>
+</div>
+<table width="100%">
+<tr style="height: 1px">
+<td width="33%" style="vertical-align: top; text-align: left; height: inherit">
+<div class="rcorners_light" style="height: 100%">
+<b>Traffic matrix: </b>1,000 most populous cities (2025 population estimates) as ground sites, with city-city traffic volume scaled &isin; [0, 1] in proportion to the population products of the city pairs. (We also examine a different workload based on economic activity in the paper.)
+</div>
+</td>
+<td width="33%" style="vertical-align: top; text-align: left; height: inherit">
+<div class="rcorners_dark" style="height: 100%">
+<b>Hardware dependencies: </b>The experiments will run on any general purpose computer. However, more cores would make the motif routines run faster.
+</div>
+</td>
+<td style="vertical-align: top; text-align: left; height: inherit">
+<div class="rcorners_light" style="height: 100%">
+<b>Software dependencies: </b>Experiments in this paper were run on <i>Ubuntu 16.04</i> with <i>Python 3.6.8</i>. The Python packages used are <i>ephem</i> and <i>networkx</i>.  The scripts use <i>gnuplot 5.0</i> or higher (for the pdfcairo/pngcairo terminal). But if you don't have it, you can still get the result files and plot them using other software.
+</div>
+</td>
+</tr>
+</table>
+<hr>
+<div style="padding: 10px;">
+<b>Motifs: Simple yet effective</b>
+</div>
+<table width="100%">
+<tr style="height: 1px">
 <td width="65%" style="vertical-align: top; text-align: left;">
 <table width="100%">
 <tr>
 <td width="35%"><img width="95%" src="viz/motif_explanation.png"/></td>
-<td style="vertical-align: top; text-align: left; padding-right: 5%;">
-A can connect to any satellites within its view (circle). If A chooses B and C, repeating this pattern across all satellites fully specifies the constellation's ISLs. Then any satellite A&prime; has the same local view of its connectivity, as shown. We call such local views <b>motifs</b>.<br/>
-How can we generate a satellite constellation with satellite positions varying over time?<br/>
-<div style="padding-right: 5%; vertical-align: top; text-align: left; background-color:#D2EEFF;">
-Here are the steps:
+<td style="vertical-align: top; text-align: left;">
+<div class="rcorners_light">
+A can connect to any satellites within its view (circle). If A chooses B and C, repeating this pattern across all satellites fully specifies the constellation's ISLs. Then any satellite A&prime; has the same local view of its connectivity, as shown. We call such local views <b>motifs</b>.
+</div>
+<div class="rcorners_dark">
+How can we <b>generate a satellite constellation</b> with satellite positions varying over time? Here are the steps:
 <ol>
   <li>Clone this repo: <i>git clone https://github.com/satnetwork/satnetwork.github.io.git</i></li>
   <li>To understand the file/directory structure, click [<a href="struct.html">here</a>]</li>
@@ -76,13 +123,16 @@ Here are the steps:
 </tr>
 <tr>
 <td style="padding-top: 5%;"><img width="95%" src="plots/motif_compare.png"/></td>
-<td style="padding-right: 5%;">
+<td>
+<div class="rcorners_light">
 For the 40<sup>2</sup> constellation, the left figure shows the topology's average stretch and hop-count for each motif at one arbitrarily chosen system snapshot in time. The metrics are computed using the population-product traffic matrix across popular cities. For clarity, we trim the plot to leave out motifs with overly large stretch or hop count. Key take-aways: (a) Different motifs differ widely in their performance; (b) motifs expose a trade-off between stretch and hop count, with several motifs at the Pareto frontier.<br/><br/>+Grid provides low stretch (1.25), but with very high hop count (10.57).
+</div>
 </td>
 </tr>
 </table>
 </td>
-<td width="30%" style="vertical-align: top; text-align: left; background-color:#D2EEFF;">
+<td width="30%" style="vertical-align: top; text-align: left; height: inherit;">
+<div class="rcorners_dark" style="height: 100%;">
 <b>Regenerate single motif metric plot from data</b> (Fast). Steps:
 <ol>
   <li>Clone this repo: <i>git clone https://github.com/satnetwork/satnetwork.github.io.git</i></li>
@@ -110,46 +160,52 @@ For the 40<sup>2</sup> constellation, the left figure shows the topology's avera
   </li>
  <li>Check output file <i>../output_data_generated/motif_compare.png</i>
 </ol>
+</div>
 </td>
 </tr>
 </table>
 <hr>
-<table width="100%" id="multi_motif"><tr><td><font size="4"><b>Improvements over +Grid achieved by a 3-zone multi-motif</b></font></tr></table>
+<div style="padding: 10px;">
+<b>Improvements over +Grid achieved by a 3-zone multi-motif</b>
+</div>
 <table width="100%">
-<tr>
-<td width="35%" style="vertical-align: top; text-align: left">
-<table width="90%" border="1" style="border-collapse: collapse;">
+<tr style="height: 1px">
+<td width="35%" style="vertical-align: top; text-align: left; height: inherit">
+<table width="100%" style="border-spacing: 0;">
 <tr>
 <td></td>
-<td align="left">Visible range ISLs</td>
-<td align="left">Min range ISLs</td>
+<td align="left" style="background: #D2EEFF">Visible range ISLs</td>
+<td align="left" style="background: #D2EEFF">Min range ISLs</td>
 </tr>
 <tr style="background-color: #f2f2f2;">
 <td></td>
-<td><table width="100%" align="center"><tr><td width="30%" align="center">&nbsp;</td><td width="35%" align="center">median M<sub>1</sub></td><td width="35%" align="center">&Phi;<sub>1</sub></td></tr></table></td>
-<td><table width="100%" align="center"><tr><td width="30%" align="center">&nbsp;</td><td width="35%" align="center">median M<sub>1</sub></td><td width="35%" align="center">&Phi;<sub>1</sub></td></tr></table></td>
+<td><table width="100%" align="center" style="border-spacing: 0;"><tr><td width="30%" align="center" style="background: #D2EEFF">&nbsp;</td><td width="35%" align="center">median M<sub>1</sub></td><td width="35%" align="center">&Phi;<sub>1</sub></td></tr></table></td>
+<td><table width="100%" align="center" style="border-spacing: 0;"><tr><td width="30%" align="center" style="background: #D2EEFF">&nbsp;</td><td width="35%" align="center">median M<sub>1</sub></td><td width="35%" align="center">&Phi;<sub>1</sub></td></tr></table></td>
 </tr>
 <tr>
 <td>Starlink</td>
-<td><table width="100%" align="center"><tr><td width="30%" align="center">5014 km</td><td width="35%" align="center">52%</td><td width="35%" align="center">54%</td></tr></table></td>
-<td><table width="100%" align="center"><tr><td width="30%" align="center">2006 km</td><td width="35%" align="center">37%</td><td width="35%" align="center">40%</td></tr></table></td>
+<td><table width="100%" align="center" style="border-spacing: 0;"><tr><td width="30%" align="center" style="background: #D2EEFF">5014 km</td><td width="35%" align="center">52%</td><td width="35%" align="center">54%</td></tr></table></td>
+<td><table width="100%" align="center" style="border-spacing: 0;"><tr><td width="30%" align="center" style="background: #D2EEFF">2006 km</td><td width="35%" align="center">37%</td><td width="35%" align="center">40%</td></tr></table></td>
 </tr>
 <tr style="background-color: #f2f2f2;">
 <td>Kuiper</td>
-<td><table width="100%" align="center"><tr><td width="30%" align="center">5440 km</td><td width="35%" align="center">38%</td><td width="35%" align="center">45%</td></tr></table></td>
-<td><table width="100%" align="center"><tr><td width="30%" align="center">1761 km</td><td width="35%" align="center">1%</td><td width="35%" align="center">4%</td></tr></table></td>
+<td><table width="100%" align="center" style="border-spacing: 0;"><tr><td width="30%" align="center" style="background: #D2EEFF">5440 km</td><td width="35%" align="center">38%</td><td width="35%" align="center">45%</td></tr></table></td>
+<td><table width="100%" align="center" style="border-spacing: 0;"><tr><td width="30%" align="center" style="background: #D2EEFF">1761 km</td><td width="35%" align="center">1%</td><td width="35%" align="center">4%</td></tr></table></td>
 </tr>
 <tr>
 <td>40<sup>2</sup></td>
-<td><table width="100%" align="center"><tr><td width="30%" align="center">5014 km</td><td width="35%" align="center">45%</td><td width="35%" align="center">48%</td></tr></table></td>
-<td><table width="100%" align="center"><tr><td width="30%" align="center">1467 km</td><td width="35%" align="center">9%</td><td width="35%" align="center">7%</td></tr></table></td>
+<td><table width="100%" align="center" style="border-spacing: 0;"><tr><td width="30%" align="center" style="background: #D2EEFF">5014 km</td><td width="35%" align="center">45%</td><td width="35%" align="center">48%</td></tr></table></td>
+<td><table width="100%" align="center" style="border-spacing: 0;"><tr><td width="30%" align="center" style="background: #D2EEFF">1467 km</td><td width="35%" align="center">9%</td><td width="35%" align="center">7%</td></tr></table></td>
 </tr>
 </table>
 </td>
-<td width="30%" style="padding-right: 5%; vertical-align: top; text-align: left;">
+<td width="30%" style="vertical-align: top; text-align: left; height: inherit">
+<div class="rcorners_light" style="height: 100%">
 The left table shows improvements in the M<sub>1</sub> (median of sum of average weighted stretch and hop count across city-pairs) and &Phi;<sub>1</sub> (weighted M<sub>1</sub> sum) for Starlink, Kuiper, and a 40<sup>2</sup> constellation. The largest reductions in the metrics are for Starlink, where even with worst-case assumptions about ISL range, improvements of 37% (median M<sub>1</sub>) and 40% (&Phi;<sub>1</sub>) are achievable. This is due to Starlink's structure with fewer orbits and more satellites in each orbit. Fewer orbits imply that satellites in adjacent orbits are farther from each other, necessitating a higher minimum ISL range for +Grid, while a larger number of satellites per orbit imply an increased number of candidates for longer ISLs.
+</div>
 </td>
-<td width="35%" style="padding-right: 5%; vertical-align: top; text-align: left; background-color:#D2EEFF;">
+<td width="35%" style="vertical-align: top; text-align: left; height: inherit">
+<div class="rcorners_dark" style="height: 100%">
 <b>Regenerate data using scripts</b> (Slow). Steps:
 <ol>
   <li>Clone this repo: <i>git clone https://github.com/satnetwork/satnetwork.github.io.git</i></li>
@@ -167,18 +223,22 @@ The left table shows improvements in the M<sub>1</sub> (median of sum of average
   </li>
  <li>Check output file <i>../output_data_generated/multi_motif/metric_improvement.txt</i> for the &Phi;<sub>1</sub> percentage improvement.
 </ol>
+</div>
 </td>
 </tr>
 </table>
 <hr>
 <table width="100%"><tr><td><font size="4"><b>3D Visualization</b></font></tr></table>
 <table width="100%">
-<tr>
+<tr style="height: 1px;">
 <td width="20%"><a href="https://satnet-authors.github.io/cesium_40_40_18deg_rings_2000km_isls.html" target="_blank"><img width="90%" src="viz/cesium_40_40_18deg_rings_2000km_isls.png"/></a>
 </td>
-<td width="80%" style="vertical-align: top; text-align: left">
+<td width="80%" style="vertical-align: top; text-align: left; height: inherit;">
+<div class="rcorners_light" style="height: 100%;">
 Optimal 3-zone multi-motif for a 40<sup>2</sup>, 53&deg; inclined constellation with maximum ISL length of 2000 km.<br/>
-Click on the image to get redirected to the interactive HTML version. Note that it might take a few to tens of seconds to load.</td>
+Click on the image to get redirected to the interactive HTML version. Note that it might take a few to tens of seconds to load.
+</div>
+</td>
 </tr>
 </table>
 </body>
